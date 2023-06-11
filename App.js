@@ -1,50 +1,93 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// React Elementc=> Normal JS
-const heading = (
-    <h1 className='head' tabIndex='5'>
-        Hello From React Element
-    </h1>
-);
+/**
+ * Header
+ *  - Logo
+ *  - Nav Items
+ * Body
+ *  - Search
+ *  - Restaurant Container
+ *      - Restaurant Card
+ *          - Img
+ *          - Name of Res, Star Rating, Cusines, etc
+ * Footer
+ *  - Copyright
+ *  - Links
+ *  - Address
+ *  - Contact
+ */
 
-const num = 3000;
+const Header = () => {
+    return (
+        <div className='header'>
+            <div className='logo-container'>
+                <img
+                    className='logo'
+                    src='https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png'
+                />
+            </div>
+            <div className='nav-items'>
+                <ul>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                    <li>Cart</li>
+                </ul>
+            </div>
+        </div>
+    );
+};
 
-// Arrow function is the Industry Standard
-const Title = () => <h1>Call me Please</h1>;
+const RestaurantCard = () => {
+    return (
+        <div className='res-card'>
+            <img
+                className="res-logo"
+                alt='res-logo'
+                src='https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/xqwpuhgnsaf18te7zvtv'
+            ></img>
+            <h3>Meghna Foods</h3>
+            <h4>Biryani, North Indian, Asian</h4>
+            <h4>4.4 stars</h4>
+            <h4>38 minutes</h4>
+        </div>
+    );
+};
 
-// ! JSX can only have a Single Parent, below code gives error
-// (
-//     <div>
-//     </div>
-//     <div>
+const Body = () => {
+    return (
+        <div className='body'>
+            <div className='Search'>Search</div>
+            <div className='res-container'>
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+                <RestaurantCard />
+            </div>
+        </div>
+    );
+};
 
-//     </div>
-// )
-// ? To solve this, we can use (This is an empty tag)<></> or <React.Fragment><React.Fragment/> provided by JSX
-
-//! We can use {} inside JSX to write any JS code
-
-// React Components
-const Healer = () => (
-    <div className='container'>
-        {heading}
-        {num}
-
-        {/* We can render component by call the function too which is JS */}
-        {Title()}
-        <Title />
-        <Title></Title>
-        {/* All these 3 are same */}
-
-        <h1 id='heading'>Rage Spell</h1>
-    </div>
-);
-
-// JSX sanitizes data that's sent to {}, so it prevents Cross-Site-Scripting
+const AppLayout = () => {
+    return (
+        <div className='app'>
+            <Header />
+            <Body />
+        </div>
+    );
+};
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-// root.render(</Healer>);
-//? Both are Same
-root.render(<Healer></Healer>);
+root.render(<AppLayout />);
