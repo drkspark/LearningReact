@@ -1,38 +1,50 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// React Component
-// Class Based Components - OLD
-// Functional Based Components - NEW
-
-// React Functional Component is just a JS function which return JSX
-// Always start name of a Component with capital alphabet
-
-// This is a React Element
+// React Elementc=> Normal JS
 const heading = (
     <h1 className='head' tabIndex='5'>
-        Namaste React using JSX
+        Hello From React Element
     </h1>
 );
 
-// These are React Components
-//? Return is optional when we make components using Arrow Functions
+const num = 3000;
 
-function Heading() {
-    // return is Mandatory
-    return <h1 id='heading'>Hello Functional Component</h1>;
-}
+// Arrow function is the Industry Standard
+const Title = () => <h1>Call me Please</h1>;
 
-//? Component Composition is Nesting of Components 
+// ! JSX can only have a Single Parent, below code gives error
+// (
+//     <div>
+//     </div>
+//     <div>
+
+//     </div>
+// )
+// ? To solve this, we can use (This is an empty tag)<></> or <React.Fragment><React.Fragment/> provided by JSX
+
+//! We can use {} inside JSX to write any JS code
+
+// React Components
 const Healer = () => (
     <div className='container'>
-        <Heading />
+        {heading}
+        {num}
+
+        {/* We can render component by call the function too which is JS */}
+        {Title()}
+        <Title />
+        <Title></Title>
+        {/* All these 3 are same */}
+
         <h1 id='heading'>Rage Spell</h1>
     </div>
 );
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-//! To render a component we need to enclose it inside <ComponentName />
+// JSX sanitizes data that's sent to {}, so it prevents Cross-Site-Scripting
 
-root.render(<Healer />);
-//? root.render(heading);  // This is a React Element
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+// root.render(</Healer>);
+//? Both are Same
+root.render(<Healer></Healer>);
