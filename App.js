@@ -11,3 +11,4 @@ console.log(heading); // Gives the Object
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(heading);
+// This is very Clumsy
