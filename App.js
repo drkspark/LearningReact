@@ -39,8 +39,8 @@ const Header = () => {
     );
 };
 
-const resData = {
-    data: {
+const resList = [
+    {
         type: "F",
         id: "66268",
         name: "Hotel Sri Madurai Meenakshi",
@@ -136,31 +136,125 @@ const resData = {
         avgRating: "4.2",
         totalRatings: 1000,
         new: false,
-    }
-};
-// Destructing on the fly
-// const RestaurantCard = ({resName, cusine})
+    },
+    {
+        type: "F",
+        id: "317848",
+        name: "Hotel chola",
+        uuid: "f61fc593-2701-4872-ad96-b6da7ff25041",
+        city: "14",
+        area: "Peelamedu",
+        totalRatingsString: "1000+ ratings",
+        cloudinaryImageId: "dqyowfw1xjihry4ikkli",
+        cuisines: ["Indian"],
+        tags: [],
+        costForTwo: 20000,
+        costForTwoString: "₹200 FOR TWO",
+        deliveryTime: 15,
+        minDeliveryTime: 15,
+        maxDeliveryTime: 15,
+        slaString: "15 MINS",
+        lastMileTravel: 0.699999988079071,
+        slugs: {
+            restaurant: "hotel-chola-ramanathapuram-ramanathapuram",
+            city: "coimbatore",
+        },
+        cityState: "14",
+        address:
+            "NO 113, SOWRIPALAYAM BUS STOP BACK SIDE, SOWRIPALAYAM, COIMBATORE, Coimbatore Corporation Ward-56, Coimbatore, Tamil Nadu, 641028",
+        locality: "Sowripalayam Road",
+        parentId: 4714,
+        unserviceable: false,
+        veg: false,
+        select: false,
+        favorite: false,
+        tradeCampaignHeaders: [],
+        chain: [],
+        feeDetails: {
+            fees: [
+                {
+                    name: "distance",
+                    fee: 2000,
+                    message: "",
+                },
+                {
+                    name: "time",
+                    fee: 0,
+                    message: "",
+                },
+                {
+                    name: "special",
+                    fee: 0,
+                    message: "",
+                },
+            ],
+            totalFees: 2000,
+            message: "",
+            title: "Delivery Charge",
+            amount: "2000",
+            icon: "",
+        },
+        availability: {
+            opened: true,
+            nextOpenMessage: "",
+            nextCloseMessage: "",
+        },
+        longDistanceEnabled: 0,
+        rainMode: "NONE",
+        thirdPartyAddress: false,
+        thirdPartyVendor: "",
+        adTrackingID: "",
+        badges: {
+            imageBased: [],
+            textBased: [],
+            textExtendedBadges: [],
+        },
+        lastMileTravelString: "0.6 kms",
+        hasSurge: false,
+        aggregatedDiscountInfoV3: {
+            header: "20% OFF",
+            subHeader: "UPTO ₹50",
+            discountTag: "",
+            headerTypeV2: 0,
+        },
+        sla: {
+            restaurantId: "317848",
+            deliveryTime: 15,
+            minDeliveryTime: 15,
+            maxDeliveryTime: 15,
+            lastMileTravel: 0.699999988079071,
+            lastMileDistance: 0,
+            serviceability: "SERVICEABLE",
+            rainMode: "NONE",
+            longDistance: "NOT_LONG_DISTANCE",
+            preferentialService: false,
+            iconType: "EMPTY",
+        },
+        promoted: false,
+        avgRating: "3.7",
+        totalRatings: 1000,
+        new: false,
+    },
+];
 
 const RestaurantCard = (props) => {
-    const { resName, cusine } = props;
-    console.log(props);
+    const { resData } = props;
+    const { cloudinaryImageId, avgRating, cuisines, name, costForTwoString } = resData;
     return (
         <div className='res-card'>
             <img
                 className='res-logo'
                 alt='res-logo'
-                src='https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/xqwpuhgnsaf18te7zvtv'
+                src={
+                    "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
+                    cloudinaryImageId
+                }
             ></img>
 
-            <h3>{resName}</h3>
-            <h4>{cusine}</h4>
-
-            {/* When we pass Normally 
-            <h3>{props.resName}</h3>
-            <h4>{props.cusine}</h4> */}
-
-            <h4>4.4 stars</h4>
-            <h4>38 minutes</h4>
+            <h3>{name}</h3>
+            <h4>{cuisines.join(", ")}</h4>
+            <h4>{avgRating}</h4>
+            <h4>{costForTwoString}</h4>
         </div>
     );
 };
@@ -172,11 +266,19 @@ const Body = () => {
         <div className='body'>
             <div className='Search'>Search</div>
             <div className='res-container'>
-                <RestaurantCard
-                    resName='Meghna Foods'
-                    cusine='Biryani, North Indian, Asian'
-                />
-                <RestaurantCard resName='KFC' cusine='Burger, Fast Food' />
+                {/* This is done manually */}
+                {/* <RestaurantCard resData={resList[0]} />
+                <RestaurantCard resData={resList[1]} /> */}
+
+                {/* We will use map to create components for the whole data present in the resList
+                  * Key is VVIMP => It tell which particular component to re-render, If not given
+                  * every component will be re-rendered => Performance HIT
+                  * NEVER give INDEX as the key, mentioned in the DOCS
+                 */}
+
+                {
+                    resList.map(restraunt => <RestaurantCard key={restraunt.id} resData={restraunt}/>)
+                }
             </div>
         </div>
     );
