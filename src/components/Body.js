@@ -1,29 +1,24 @@
 import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
+// Hook => It's just a special function with specific properties which are very useful
 const Body = () => {
-    // ! Local State Variable
-    // useState gives us an Array having 2 elements:
-    //  0th idx => State Variable
-    //  1st idx => setState Function used to update the State and trigger a re-render
-    // useState takes an argument: useState(initial State)
-    const [restaurantData, setRestarauntData] = useState(resList); // Here we are just Destructuring
-
+    const [restaurantData, setRestarauntData] = useState(resList); 
     /**
-     * We ca also destructure it like
-     * const arr = useState(resList);
-     *
-     * const [restrauntData, setRestrauntData] = arr;
-     *
-     *!          OR
-     *
-     * const restaurantData = arr[0];
-     * const setRestrauntData = arr[1]
+     * 
+     * Syntax: useEffect(callBack Function, Dependency Array)
+     * callBack Function: This will be called
+     * Dependency Array: Decides when this callBack function has to be called i.e Triggers
+     *  
+     * ! When is the useEffect() called?
+     * - Once the whole component is loaded, then the useEffect is called
      */
 
-    //! Whenever you are using data make sure you don't edit the Data you fetched from the API
-
+    useEffect(() => {
+        console.log("useEffect Called");
+    }, []);
+    console.log("I am always first");
     function getTopRated() {
         const resData = resList.filter(
             (restaurant) => restaurant.data.avgRating > 4.0
@@ -58,12 +53,3 @@ const Body = () => {
 };
 
 export default Body;
-
-/**
- * Updating Virtual DOM => Reconsiliation Algorithm or React Fibre
- *? Virtual DOM => Object which we get when we print the JSX componenet
- * This came out in React 16
- *? This will use Diff algorithm to find the difference and then update the real DOM.
- * It finds out differnce between those 2 objects.
- * React doesn't touch the HTML
- */
