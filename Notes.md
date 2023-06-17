@@ -20,3 +20,6 @@ Single Responsibility Principle
     -   This will give us a better UX 
     -   We can also put a Loading Screen
     -   We will be rendering 2-times, but react has a fast render-cycle => NO PROBLEM
+
+
+    ## Use CORS extension, so that it allows, us to call Swiggy API
