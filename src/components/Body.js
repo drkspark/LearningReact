@@ -1,19 +1,9 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
+import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
 
-// Hook => It's just a special function with specific properties which are very useful
 const Body = () => {
     const [restaurantData, setRestarauntData] = useState([]);
-    /**
-     *
-     * Syntax: useEffect(callBack Function, Dependency Array)
-     * callBack Function: This will be called
-     * Dependency Array: Decides when this callBack function has to be called i.e Triggers
-     *
-     * ! When is the useEffect() called?
-     * - Once the whole component is loaded, then the useEffect is called
-     */
 
     useEffect(() => {
         fetchData();
@@ -25,9 +15,8 @@ const Body = () => {
         );
 
         const json = await data.json();
-        // console.log(json.data.cards[2].data.data.cards);
-        
-        // We need to use: Optional Chaining 
+        // We need to use: Optional Chaining
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
         setRestarauntData(json?.data?.cards[2]?.data?.data?.cards);
     };
 
@@ -44,7 +33,17 @@ const Body = () => {
         );
         setRestarauntData(resData);
     }
-    return (
+
+    /**
+     *  When the data is being Fetched we need to show something....
+     *  What should we show?? =>> Loading Spinner ? Nopes that's not relevant nowadays
+     *? We will be showing a SHIMMER UI
+     *  It's kind of showing fake cards or Skelton UI
+     */
+
+    return restaurantData.length === 0 ? (
+        <Shimmer />
+    ) : (
         <div className='body'>
             <button className='top-rated' onClick={getTopRated}>
                 Top Rated Restraunts
