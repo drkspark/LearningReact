@@ -47,3 +47,8 @@
 .res-logo {
     width: 100%;
 }
+
+.top-rated, .low-rated{
+    padding: 2.5px;
+    margin: 10px;
+}
