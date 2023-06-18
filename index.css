@@ -69,3 +69,7 @@
 .login-btn {
     padding: 0px 15px;
 }
+
+.filter {
+    display: flex;
+}
