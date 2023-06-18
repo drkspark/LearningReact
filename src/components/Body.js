@@ -15,40 +15,33 @@ const Body = () => {
         );
 
         const json = await data.json();
-        // We need to use: Optional Chaining
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
         setRestarauntData(json?.data?.cards[2]?.data?.data?.cards);
     };
-
-    function getTopRated() {
-        const resData = resList.filter(
-            (restaurant) => restaurant.data.avgRating > 4.0
-        );
-        setRestarauntData(resData);
-    }
-
-    function getLowRated() {
-        const resData = resList.filter(
-            (restaurant) => restaurant.data.avgRating < 4.0
-        );
-        setRestarauntData(resData);
-    }
-
-    /**
-     *  When the data is being Fetched we need to show something....
-     *  What should we show?? =>> Loading Spinner ? Nopes that's not relevant nowadays
-     *? We will be showing a SHIMMER UI
-     *  It's kind of showing fake cards or Skelton UI
-     */
 
     return restaurantData.length === 0 ? (
         <Shimmer />
     ) : (
         <div className='body'>
-            <button className='top-rated' onClick={getTopRated}>
+            <button
+                className='top-rated'
+                onClick={() => {
+                    const resData = resList.filter(
+                        (restaurant) => restaurant.data.avgRating > 4.0
+                    );
+                    setRestarauntData(resData);
+                }}
+            >
                 Top Rated Restraunts
             </button>
-            <button className='low-rated' onClick={getLowRated}>
+            <button
+                className='low-rated'
+                onClick={() => {
+                    const resData = resList.filter(
+                        (restaurant) => restaurant.data.avgRating < 4.0
+                    );
+                    setRestarauntData(resData);
+                }}
+            >
                 Low Rated Restraunts
             </button>
             <div className='res-container'>
