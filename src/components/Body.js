@@ -7,7 +7,6 @@ const Body = () => {
     const [restaurantData, setRestarauntData] = useState([]);
     const [searchText, setSearchText] = useState("");
 
-    console.log("Body Rendered"); // This helps us visualise that our body is being re-rendered again whenever we type
     
     useEffect(() => {
         fetchData();
@@ -22,16 +21,7 @@ const Body = () => {
         setApiData(json?.data?.cards[2]?.data?.data?.cards);
         setRestarauntData(json?.data?.cards[2]?.data?.data?.cards);
     };
-    /**
-     * To use the Input text-box we need to do 2 things:
-     * 1. Bind the text-box with a local State Variable
-     * If we only do step1, we won't be able to see the text being typed in it.
-     * 2. Add onChange which will update the, text being typed into the input box
-     *
-     * ! Every time we type a Character, it re-renders the whole body, and just changes the Text in input box. That's so effecient
-     *
-     * ! Whenever a state variable update, react triggers a reconciliation cycle (re-renders the component)
-     */
+   
     return restaurantData.length === 0 ? (
         <Shimmer />
     ) : (
@@ -48,7 +38,6 @@ const Body = () => {
                     />
                     <button
                         onClick={() => {
-                            // Filter the cards and update UI
                             const searchedRestraunt = apiData.filter(
                                 (restaurant) =>
                                     restaurant.data.name
