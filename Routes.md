@@ -13,3 +13,10 @@
 -   Always call the useState at the <b>TOP</b> so as to have consistent data through out.
 -   Never declare useState inside if-else, loops, other function apart from the functional components
 
+
+## React Router Dom v6
+-   browserRouter
+-   RouterProvide
+-   Outlet
+-   Link
+-   Whenever goinf to a different Route never use <b>anchor tag</b> use the Link component
